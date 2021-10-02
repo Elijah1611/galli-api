@@ -1,0 +1,19 @@
+{
+   "name": "galli-api",
+   "version": "0.0.1",
+   "description": "A Social Gallery App.",
+   "devDependencies": {
+      "ts-node": "3.3.0",
+      "@types/node": "^8.0.29",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "typeorm": "0.2.37",
+      "reflect-metadata": "^0.1.10",
+      "pg": "^8.4.0"
+   },
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "gen": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:generate -n MigrationName"
+   }
+}
