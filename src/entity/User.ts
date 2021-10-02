@@ -1,4 +1,4 @@
-import { IsAlpha, IsAlphanumeric, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, Length, MaxLength, maxLength, MinLength } from "class-validator";
+import { IsAlpha, IsAlphanumeric, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
 import {Entity, Column, OneToMany} from "typeorm";
 import { Comment } from "./Comment";
 import { EntityBase } from "./EntityBase";
@@ -20,16 +20,18 @@ export class User extends EntityBase{
     @Length(1, 50)
     lastName: string;
 
-    @Column()
+    @Column({ unique: true })
+    @IsString()
     @IsNotEmpty()
     @Length(1, 12)
     username: string;
 
     @Column()
+    @IsString()
     @IsNotEmpty()
     passwordHash: string;
 
-    @Column()
+    @Column({ unique: true })
     @IsEmail()
     @IsNotEmpty()
     @IsLowercase()
@@ -37,6 +39,7 @@ export class User extends EntityBase{
     email: string;
 
     @Column()
+    @IsString()
     @IsOptional()
     @MaxLength(160)
     bio: string;

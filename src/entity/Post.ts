@@ -1,4 +1,4 @@
-import { IsFQDN, IsNotEmpty, IsOptional, MaxLength, MinLength } from "class-validator";
+import { IsFQDN, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany, JoinTable, OneToMany} from "typeorm";
 import { Comment } from "./Comment";
 import { EntityBase } from "./EntityBase";
@@ -9,6 +9,7 @@ import { User } from "./User";
 export class Post extends EntityBase{
 
     @Column()
+    @IsString()
     @IsOptional()
     @MaxLength(50)
     title: string;
