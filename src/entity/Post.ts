@@ -1,28 +1,31 @@
+import { IsFQDN, IsNotEmpty, IsOptional, MaxLength, MinLength } from "class-validator";
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany, JoinTable, OneToMany} from "typeorm";
+import { Comment } from "./Comment";
+import { EntityBase } from "./EntityBase";
 import { Favorite } from "./Favorite";
 import { User } from "./User";
 
 @Entity()
-export class Post {
-
-    @PrimaryGeneratedColumn()
-    id: number;
+export class Post extends EntityBase{
 
     @Column()
+    @IsOptional()
+    @MaxLength(50)
     title: string;
 
     @Column()
+    @IsFQDN()
+    @IsNotEmpty()
+    @MinLength(10)
     image_url: string;
 
-    @CreateDateColumn()
-    created_at: Date;
-
-    @UpdateDateColumn()
-    updated_at: Date;
-
     @ManyToOne(() => User, user => user.posts, { onDelete: "CASCADE" })
-    user: User
+    user: User;
+    
+    @OneToMany(() => Comment, comment => comment.post)
+    comments: Comment[]
 
-    @OneToMany(() => Favorite, favorite => favorite.posts)
+    @OneToMany(() => Favorite, favorite => favorite.post)
     favorites: Favorite[]
+
 }

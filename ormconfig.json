@@ -6,7 +6,7 @@
    "password": null,
    "database": "galli-dev",
    "synchronize": false,
-   "logging": false,
+   "logging": true,
    "entities": [
       "src/entity/**/*.ts"
    ],
