@@ -38,17 +38,17 @@ export class User extends EntityBase{
     @Length(1, 60)
     email: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsString()
     @IsOptional()
     @MaxLength(160)
-    bio: string;
+    bio?: string;
 
-    @Column()
+    @Column({ nullable: true })
     @IsFQDN()
     @IsOptional()
     @MinLength(10)
-    avatarUrl: string;
+    avatarUrl?: string;
     
     @OneToMany(() => Post, post => post.user)
     posts: Post[] 

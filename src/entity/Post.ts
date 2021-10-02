@@ -8,7 +8,7 @@ import { User } from "./User";
 @Entity()
 export class Post extends EntityBase{
 
-    @Column()
+    @Column({ nullable: true })
     @IsString()
     @IsOptional()
     @MaxLength(50)
