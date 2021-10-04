@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { IsAlpha, IsAlphanumeric, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
 import {Entity, Column, OneToMany} from "typeorm";
 import { Comment } from "./Comment";
@@ -26,10 +27,11 @@ export class User extends EntityBase{
     @Length(1, 12)
     username: string;
 
-    @Column()
+    @Exclude({ toPlainOnly: true })
+    @Column({ select: false })
     @IsString()
     @IsNotEmpty()
-    passwordHash: string;
+    password: string;
 
     @Column({ unique: true })
     @IsEmail()

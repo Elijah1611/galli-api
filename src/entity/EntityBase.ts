@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsUUID } from "class-validator";
+import { IsDate, IsNotEmpty, IsOptional, IsUUID } from "class-validator";
 import { CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export abstract class EntityBase {
@@ -16,6 +16,7 @@ export abstract class EntityBase {
     updated_at: Date;
 
     @DeleteDateColumn()
+    @IsOptional()
     @IsDate()
     deleted_at: Date;
 }
