@@ -6,13 +6,10 @@ import { HttpException, Status, StatusCode } from "../exception/HttpException";
 import { ResourceTag } from "../interface/ResourceTag";
 
 export class UserService {
-    public static async db() {
-        return 
-    }
 
     public static async getAll(): Promise<User[]> {
         
-        const db = await getConnection().getRepository(User)
+        const db = await getConnection(process.env.CONNECTION).getRepository(User)
 
         const users = await db.find()
 
@@ -21,7 +18,7 @@ export class UserService {
 
     public static async getByUUID(uuid: string): Promise<User> {
 
-        const db = await getConnection().getRepository(User)
+        const db = await getConnection(process.env.CONNECTION).getRepository(User)
 
         const user = await db.findOne(uuid)
 
@@ -30,7 +27,7 @@ export class UserService {
 
     public static async create(user: UserCreateDto): Promise<User> {
 
-            const db = await getConnection().getRepository(User)
+            const db = await getConnection(process.env.CONNECTION).getRepository(User)
 
             const foundUser = await db.findOne({ where: [
                 {username: user.username},
@@ -49,7 +46,7 @@ export class UserService {
     }
 
     public static async update(id: string, updateUserData: Partial<UserUpdateDto>): Promise<User> {
-        const db = await getConnection().getRepository(User)
+        const db = await getConnection(process.env.CONNECTION).getRepository(User)
         
         const foundUser = await db.findOne(id)
 
@@ -65,7 +62,8 @@ export class UserService {
     }
 
     public static async remove(uuid: string): Promise<Number> {
-        const db = await getConnection().getRepository(User)
+
+        const db = await getConnection(process.env.CONNECTION).getRepository(User)
 
         const result = await (await db.delete(uuid)).affected
 

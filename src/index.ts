@@ -1,13 +1,19 @@
 import { createConnection } from 'typeorm';
+import DbConnection from './data/connection';
 import Server from './server'
 
 const port = process.env.PORT || 7000
 
 const server = new Server();
 
-const initDb = async () => await createConnection()
+const initDb = new DbConnection('default')
 
-initDb()
-.then(() => server.run(port))
-.catch(error => console.log(error))
-
+if (process.env.NODE_ENV == 'production') {
+    initDb.create('production')
+    .then(() => server.run(port))
+    .catch(error => console.log(error))
+} else {
+    initDb.create()
+    .then(() => server.run(port))
+    .catch(error => console.log(error))
+}

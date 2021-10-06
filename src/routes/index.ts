@@ -1,14 +1,11 @@
 import express, { NextFunction, Request, Response, Router } from "express";
 import UserController from "../controller/UserController";
 import { HttpException, Status, StatusCode } from "../exception/HttpException";
+import UserRouter from './users'
 
-const router: Router = express.Router()
+const router = express.Router()
 
-router.get('/users/:id', UserController.getOne)
-router.patch('/users/:id', UserController.update)
-router.delete('/users/:id', UserController.delete)
-router.get('/users', UserController.getAll)
-router.post('/users', UserController.create)
+router.use(UserRouter)
 
 router.all('*', (req: Request, res: Response, next: NextFunction) => {
     const err = new HttpException(

@@ -13,13 +13,13 @@ export class User extends EntityBase{
     @IsAlpha()
     @IsNotEmpty()
     @Length(1, 50)
-    firstName: string;
+    first_name: string;
 
     @Column()
     @IsAlpha()
     @IsNotEmpty()
     @Length(1, 50)
-    lastName: string;
+    last_name: string;
 
     @Column({ unique: true })
     @IsString()
@@ -50,7 +50,7 @@ export class User extends EntityBase{
     @IsFQDN()
     @IsOptional()
     @MinLength(10)
-    avatarUrl?: string;
+    avatar_url?: string;
     
     @OneToMany(() => Post, post => post.user)
     posts: Post[] 
