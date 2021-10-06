@@ -23,6 +23,8 @@ export class UserService {
 
         const user = await db.findOne(uuid)
 
+        if (!user) throw new HttpException(StatusCode.NOT_FOUND, Status.FAIL, "User by that id could not be found.")
+
         return user
     }
 

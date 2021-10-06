@@ -24,7 +24,7 @@ export class UserController {
                 const uuid = req.params.id
 
                 const result = await UserService.getByUUID(uuid)
-                console.log(result)
+
                 return res.status(StatusCode.OK).json(result)
         }
 

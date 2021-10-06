@@ -5,6 +5,9 @@ import { globalErrorHandler } from './exception/GlobalErrorHandler';
 import { validationErrorHandler } from './exception/ValidationErrorHandler';
 import router from './routes'
 import JwtStrategyConfig from './JwtStrategyConfig';
+import helmet from 'helmet';
+import cors from 'cors'
+import morgan from 'morgan'
 
 class ApiServer {
   public app: Express;
@@ -17,6 +20,12 @@ class ApiServer {
 
   setup() {
     this.app.use(express.json());
+
+    this.app.use(helmet());
+
+    this.app.use(cors());
+
+    this.app.use(morgan('dev'))
 
     passport.use(JwtStrategyConfig)
 

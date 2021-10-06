@@ -6,7 +6,8 @@ const router: Router = express.Router()
 
 router
     .route('/users')
-    .get(passport.authenticate('jwt', { session: false }), UserController.getAll)
+    // .get(passport.authenticate('jwt', { session: false }), UserController.getAll)
+    .get(UserController.getAll)
     .post(UserController.create)
 
 router
