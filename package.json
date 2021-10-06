@@ -23,6 +23,7 @@
     "typescript": "3.3.3333"
   },
   "dependencies": {
+    "axios": "^0.22.0",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
     "class-transformer-validator": "^0.9.1",
