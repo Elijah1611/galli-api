@@ -1,16 +1,18 @@
 import express, { Router } from "express";
+import passport from "passport";
 import UserController from "../controller/UserController";
 
 const router: Router = express.Router()
 
-router.get('/users', UserController.getAll)
+router
+    .route('/users')
+    .get(passport.authenticate('jwt', { session: false }), UserController.getAll)
+    .post(UserController.create)
 
-router.get('/users/:id', UserController.getOne)
-
-router.post('/users', UserController.create)
-
-router.patch('/users/:id', UserController.update)
-
-router.delete('/users/:id', UserController.delete)
+router
+    .route('/users/:id')
+    .get(UserController.getOne)
+    .patch(UserController.update)
+    .delete(UserController.delete)
 
 export default router

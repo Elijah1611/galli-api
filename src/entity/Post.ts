@@ -1,12 +1,12 @@
 import { IsFQDN, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany, JoinTable, OneToMany, JoinColumn} from "typeorm";
+import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 import { Comment } from "./Comment";
 import { EntityBase } from "./EntityBase";
 import { Favorite } from "./Favorite";
 import { User } from "./User";
 
 @Entity()
-export class Post extends EntityBase{
+export class Post extends EntityBase {
 
     @Column({ nullable: true })
     @IsString()
@@ -24,9 +24,9 @@ export class Post extends EntityBase{
     user_id: number;
 
     @ManyToOne(() => User, user => user.posts, { onDelete: "CASCADE" })
-    @JoinColumn({ name: 'user_id'})
+    @JoinColumn({ name: 'user_id' })
     user: User;
-    
+
     @OneToMany(() => Comment, comment => comment.post)
     comments: Comment[]
 

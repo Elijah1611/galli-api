@@ -1,5 +1,5 @@
-import { IsDate, IsNotEmpty, IsOptional, IsUUID } from "class-validator";
-import { CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { IsDate, IsOptional, IsUUID } from "class-validator";
+import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export abstract class EntityBase {
 

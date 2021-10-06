@@ -1,5 +1,4 @@
 import { transformAndValidate } from "class-transformer-validator";
-import { validate, ValidateBy, validateOrReject } from "class-validator";
 import { NextFunction, Request, Response } from "express"
 import { UserCreateDto } from "../dto/create/UserCreateDto";
 import { UserUpdateDto } from "../dto/update/UserUpdateDto";
@@ -11,59 +10,59 @@ import UserService from "../service/UserService";
 
 export class UserController {
 
-    @TryCatch
-    public static async getAll(req: Request, res: Response): Promise<Response<User[]>> {
+        @TryCatch
+        public static async getAll(req: Request, res: Response): Promise<Response<User[]>> {
 
-            const result = await UserService.getAll()
+                const result = await UserService.getAll()
 
-            return res.status(StatusCode.OK).json(result)
-    }
+                return res.status(StatusCode.OK).json(result)
+        }
 
-    @TryCatch
-    public static async getOne(req: Request, res: Response): Promise<Response<User>> {
-        
-            const uuid = req.params.id
+        @TryCatch
+        public static async getOne(req: Request, res: Response): Promise<Response<User>> {
 
-            const result = await UserService.getByUUID(uuid)
-            console.log(result)
-            return res.status(StatusCode.OK).json(result)
-    }
+                const uuid = req.params.id
 
-    @TryCatch
-    public static async create(req: Request, res: Response, next: NextFunction): Promise<Response<ResourceTag>> {
+                const result = await UserService.getByUUID(uuid)
+                console.log(result)
+                return res.status(StatusCode.OK).json(result)
+        }
 
-            const user = await transformAndValidate(UserCreateDto, req.body) as UserCreateDto;
-            
-            const newUser = await UserService.create(user)
+        @TryCatch
+        public static async create(req: Request, res: Response, next: NextFunction): Promise<Response<ResourceTag>> {
 
-            return res.status(StatusCode.CREATED).json(newUser)
-    }
+                const user = await transformAndValidate(UserCreateDto, req.body) as UserCreateDto;
 
-    @TryCatch
-    public static async update(req: Request, res: Response, next: NextFunction): Promise<Response<User>> {
+                const newUser = await UserService.create(user)
 
-            const id = req.params.id
+                return res.status(StatusCode.CREATED).json(newUser)
+        }
 
-            const user = await transformAndValidate(UserUpdateDto, req.body) as UserUpdateDto;
-            
-            const updatedUser = await UserService.update(id, user)
+        @TryCatch
+        public static async update(req: Request, res: Response, next: NextFunction): Promise<Response<User>> {
 
-            return res.status(StatusCode.OK).json(updatedUser)
-    }
+                const id = req.params.id
 
-    @TryCatch
-    public static async delete(req: Request, res: Response, next: NextFunction): Promise<Response<HttpException>> {
+                const user = await transformAndValidate(UserUpdateDto, req.body) as UserUpdateDto;
 
-            const id = req.params.id
-            
-            const removed = await UserService.remove(id)
+                const updatedUser = await UserService.update(id, user)
 
-            return res.status(StatusCode.OK).json({
-                statusCode: StatusCode.OK,
-                status: 'Successful',
-                message: `${removed} user successfully removed.`,
-            })
-    }
+                return res.status(StatusCode.OK).json(updatedUser)
+        }
+
+        @TryCatch
+        public static async delete(req: Request, res: Response, next: NextFunction): Promise<Response<HttpException>> {
+
+                const id = req.params.id
+
+                const removed = await UserService.remove(id)
+
+                return res.status(StatusCode.OK).json({
+                        statusCode: StatusCode.OK,
+                        status: 'Successful',
+                        message: `${removed} user successfully removed.`,
+                })
+        }
 }
 
 export default UserController

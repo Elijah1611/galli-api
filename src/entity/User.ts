@@ -1,13 +1,13 @@
 import { Exclude } from "class-transformer";
-import { IsAlpha, IsAlphanumeric, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
-import {Entity, Column, OneToMany} from "typeorm";
+import { IsAlpha, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
+import { Entity, Column, OneToMany } from "typeorm";
 import { Comment } from "./Comment";
 import { EntityBase } from "./EntityBase";
 import { Favorite } from "./Favorite";
 import { Post } from "./Post";
 
 @Entity()
-export class User extends EntityBase{
+export class User extends EntityBase {
 
     @Column()
     @IsAlpha()
@@ -51,9 +51,9 @@ export class User extends EntityBase{
     @IsOptional()
     @MinLength(10)
     avatar_url?: string;
-    
+
     @OneToMany(() => Post, post => post.user)
-    posts: Post[] 
+    posts: Post[]
 
     @OneToMany(() => Comment, comment => comment.user)
     comments: Comment[]

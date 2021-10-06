@@ -1,4 +1,3 @@
-import { createConnection } from 'typeorm';
 import DbConnection from './data/connection';
 import Server from './server'
 
@@ -10,10 +9,10 @@ const initDb = new DbConnection('default')
 
 if (process.env.NODE_ENV == 'production') {
     initDb.create('production')
-    .then(() => server.run(port))
-    .catch(error => console.log(error))
+        .then(() => server.run(port))
+        .catch(error => console.log(error))
 } else {
     initDb.create()
-    .then(() => server.run(port))
-    .catch(error => console.log(error))
+        .then(() => server.run(port))
+        .catch(error => console.log(error))
 }

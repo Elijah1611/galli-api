@@ -1,5 +1,5 @@
 import { IsAlpha, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
-import {Column} from "typeorm";
+import { Column } from "typeorm";
 
 export class UserUpdateDto {
 
@@ -7,13 +7,13 @@ export class UserUpdateDto {
     @IsAlpha()
     @IsOptional()
     @Length(1, 50)
-    firstName: string;
+    first_name: string;
 
     @Column()
     @IsAlpha()
     @IsOptional()
     @Length(1, 50)
-    lastName: string;
+    last_name: string;
 
     @Column({ unique: true })
     @IsString()
@@ -38,6 +38,6 @@ export class UserUpdateDto {
     @IsFQDN()
     @IsOptional()
     @MinLength(10)
-    avatarUrl?: string;
+    avatar_url?: string;
 
 }

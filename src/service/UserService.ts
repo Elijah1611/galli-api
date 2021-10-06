@@ -4,11 +4,12 @@ import { UserUpdateDto } from "../dto/update/UserUpdateDto";
 import { User } from "../entity/User";
 import { HttpException, Status, StatusCode } from "../exception/HttpException";
 import { ResourceTag } from "../interface/ResourceTag";
+import { AuthService } from "./AuthService";
 
 export class UserService {
 
     public static async getAll(): Promise<User[]> {
-        
+
         const db = await getConnection(process.env.CONNECTION).getRepository(User)
 
         const users = await db.find()
@@ -27,27 +28,31 @@ export class UserService {
 
     public static async create(user: UserCreateDto): Promise<User> {
 
-            const db = await getConnection(process.env.CONNECTION).getRepository(User)
+        const db = await getConnection(process.env.CONNECTION).getRepository(User)
 
-            const foundUser = await db.findOne({ where: [
-                {username: user.username},
-                {email: user.email}
-            ]})
+        const foundUser = await db.findOne({
+            where: [
+                { username: user.username },
+                { email: user.email }
+            ]
+        })
 
-            if (foundUser) {
-                throw new HttpException(StatusCode.BAD_REQUEST, Status.FAIL, "This user already has an account.")
-            }
+        if (foundUser) {
+            throw new HttpException(StatusCode.BAD_REQUEST, Status.FAIL, "This user already has an account.")
+        }
 
-            const createdUser: ResourceTag = await (await db.insert(user)).raw[0]
-            
-            const newUser = await db.findOne(createdUser.id)
+        user.password = await AuthService.HashPassword(user.password)
 
-            return newUser
+        const createdUser: ResourceTag = await (await db.insert(user)).raw[0]
+
+        const newUser = await db.findOne(createdUser.id)
+
+        return newUser
     }
 
     public static async update(id: string, updateUserData: Partial<UserUpdateDto>): Promise<User> {
         const db = await getConnection(process.env.CONNECTION).getRepository(User)
-        
+
         const foundUser = await db.findOne(id)
 
         if (!foundUser) {
