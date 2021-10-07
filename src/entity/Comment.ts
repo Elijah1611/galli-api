@@ -13,7 +13,7 @@ export class Comment extends EntityBase {
     @MaxLength(160)
     content: string;
 
-    @Column({ nullable: true })
+    @Column()
     @IsUUID()
     user_id: string;
 
@@ -21,7 +21,7 @@ export class Comment extends EntityBase {
     @JoinColumn({ name: 'user_id' })
     user: User;
 
-    @Column({ nullable: true })
+    @Column()
     @IsUUID()
     post_id: string;
 

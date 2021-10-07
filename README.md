@@ -14,3 +14,4 @@ Steps to run this project:
 - ``0.5.0`` - Verify JWT Tokens with Passport - Oct 6, 2021
 - ``0.6.0`` - Unsplash API Service - Oct 6, 2021
 - ``0.7.0`` - Post Service - Oct 6, 2021
+- ``0.8.0`` - Favorite Service - Oct 6, 2021

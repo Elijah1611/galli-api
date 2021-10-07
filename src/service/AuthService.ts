@@ -13,6 +13,8 @@ export class AuthService {
 
         const user = await db.findOne({ username: username })
 
+        // @TODO: Refactor to use simple syntax 
+        // db.find({ select: ["password"], where: { username: user.username } })
         const userPasswordResults = await connection.manager.query(`SELECT "password" FROM "user" as u WHERE u.username = '${user.username}'`)
         const userPassword = userPasswordResults[0].password
 

@@ -21,7 +21,7 @@ export class Favorite {
     @Max(10)
     reaction: Reaction
 
-    @Column({ nullable: true })
+    @Column()
     @IsUUID()
     user_id: string;
 
@@ -29,7 +29,7 @@ export class Favorite {
     @JoinColumn({ name: 'user_id' })
     user: User;
 
-    @Column({ nullable: true })
+    @Column()
     @IsUUID()
     post_id: string;
 

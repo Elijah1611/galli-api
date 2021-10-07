@@ -19,7 +19,7 @@ export class Post extends EntityBase {
     @MinLength(10)
     image_url: string;
 
-    @Column({ nullable: true })
+    @Column()
     @IsUUID()
     user_id: string;
 

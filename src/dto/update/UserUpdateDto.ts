@@ -35,7 +35,6 @@ export class UserUpdateDto {
     bio?: string;
 
     @Column({ nullable: true })
-    @IsFQDN()
     @IsOptional()
     @MinLength(10)
     avatar_url?: string;

@@ -17,6 +17,15 @@ export class UserService {
         return users
     }
 
+    public static async getAllFull(): Promise<User[]> {
+
+        const db = await getConnection(process.env.CONNECTION).getRepository(User)
+
+        const users = await db.find({ relations: ["posts", "comments", "favorites"] })
+
+        return users
+    }
+
     public static async getByUUID(uuid: string): Promise<User> {
 
         const db = await getConnection(process.env.CONNECTION).getRepository(User)

@@ -4,6 +4,7 @@ import UserRouter from './users'
 import AuthRouter from './auth'
 import UnsplashRouter from './unsplash'
 import PostRouter from './posts'
+import FavoriteRouter from './favorites'
 
 const router = express.Router()
 
@@ -12,6 +13,8 @@ router.use(AuthRouter)
 router.use(UserRouter)
 
 router.use(PostRouter)
+
+router.use(FavoriteRouter)
 
 router.use(UnsplashRouter)
 

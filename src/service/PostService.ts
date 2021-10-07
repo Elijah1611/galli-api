@@ -2,7 +2,6 @@ import { getConnection } from "typeorm";
 import { PostCreateDto } from "../dto/create/PostCreateDto";
 import { PostUpdateDto } from "../dto/update/PostUpdateDto";
 import { Post } from "../entity/Post";
-import { User } from "../entity/User";
 import { HttpException, Status, StatusCode } from "../exception/HttpException";
 import { ResourceTag } from "../interface/ResourceTag";
 
