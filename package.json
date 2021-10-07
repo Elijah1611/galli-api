@@ -1,6 +1,6 @@
 {
   "name": "galli-api",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "A Social Gallery App.",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

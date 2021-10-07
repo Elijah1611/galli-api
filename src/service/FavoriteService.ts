@@ -1,11 +1,7 @@
 import { getConnection } from "typeorm";
 import { FavoriteCreateDto } from "../dto/create/FavoriteCreateDto";
-import { PostCreateDto } from "../dto/create/PostCreateDto";
 import { FavoriteUpdateDto } from "../dto/update/FavoriteUpdateDto";
-import { PostUpdateDto } from "../dto/update/PostUpdateDto";
 import { Favorite } from "../entity/Favorite";
-import { Post } from "../entity/Post";
-import { User } from "../entity/User";
 import { HttpException, Status, StatusCode } from "../exception/HttpException";
 import { ResourceTag } from "../interface/ResourceTag";
 
