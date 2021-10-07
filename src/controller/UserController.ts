@@ -29,7 +29,7 @@ export class UserController {
         }
 
         @TryCatch
-        public static async create(req: Request, res: Response, next: NextFunction): Promise<Response<ResourceTag>> {
+        public static async create(req: Request, res: Response, next: NextFunction): Promise<Response<User>> {
 
                 const user = await transformAndValidate(UserCreateDto, req.body) as UserCreateDto;
 

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MaxLength } from "class-validator";
+import { IsNotEmpty, IsString, IsUUID, MaxLength } from "class-validator";
 import { Entity, ManyToOne, Column, JoinColumn } from "typeorm";
 import { EntityBase } from "./EntityBase";
 import { Post } from "./Post";
@@ -14,14 +14,16 @@ export class Comment extends EntityBase {
     content: string;
 
     @Column({ nullable: true })
-    user_id: number;
+    @IsUUID()
+    user_id: string;
 
     @ManyToOne(() => User, user => user.comments, { onDelete: "CASCADE" })
     @JoinColumn({ name: 'user_id' })
     user: User;
 
     @Column({ nullable: true })
-    post_id: number;
+    @IsUUID()
+    post_id: string;
 
     @ManyToOne(() => Post, post => post.comments, { onDelete: "CASCADE" })
     @JoinColumn({ name: 'post_id' })

@@ -3,12 +3,15 @@ import { HttpException, Status, StatusCode } from "../exception/HttpException";
 import UserRouter from './users'
 import AuthRouter from './auth'
 import UnsplashRouter from './unsplash'
+import PostRouter from './posts'
 
 const router = express.Router()
 
 router.use(AuthRouter)
 
 router.use(UserRouter)
+
+router.use(PostRouter)
 
 router.use(UnsplashRouter)
 

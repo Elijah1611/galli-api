@@ -1,4 +1,4 @@
-import { IsFQDN, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
+import { IsFQDN, IsNotEmpty, IsOptional, IsString, IsUUID, MaxLength, MinLength } from "class-validator";
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 import { Comment } from "./Comment";
 import { EntityBase } from "./EntityBase";
@@ -15,13 +15,13 @@ export class Post extends EntityBase {
     title: string;
 
     @Column()
-    @IsFQDN()
     @IsNotEmpty()
     @MinLength(10)
     image_url: string;
 
     @Column({ nullable: true })
-    user_id: number;
+    @IsUUID()
+    user_id: string;
 
     @ManyToOne(() => User, user => user.posts, { onDelete: "CASCADE" })
     @JoinColumn({ name: 'user_id' })
