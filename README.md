@@ -16,3 +16,4 @@ Steps to run this project:
 - ``0.7.0`` - Post Service - Oct 6, 2021
 - ``0.8.0`` - Favorite Service - Oct 6, 2021
 - ``0.9.0`` - Comment Service - Oct 7, 2021
+- ``0.10.0`` - Image Upload Service - Oct 7, 2021

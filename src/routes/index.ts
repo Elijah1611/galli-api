@@ -6,6 +6,7 @@ import UnsplashRouter from './unsplash'
 import PostRouter from './posts'
 import FavoriteRouter from './favorites'
 import CommentRouter from './comments'
+import UploadRouter from './upload'
 
 const router = express.Router()
 
@@ -20,6 +21,8 @@ router.use(FavoriteRouter)
 router.use(CommentRouter)
 
 router.use(UnsplashRouter)
+
+router.use(UploadRouter)
 
 router.all('*', (req: Request, res: Response, next: NextFunction) => {
     const err = new HttpException(

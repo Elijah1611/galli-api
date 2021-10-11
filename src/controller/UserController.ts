@@ -13,7 +13,11 @@ export class UserController {
         @TryCatch
         public static async getAll(req: Request, res: Response): Promise<Response<User[]>> {
 
-                const result = await UserService.getAll()
+                const { full } = req.query
+
+                let result;
+
+                !!full ? result = await UserService.getAllFull() : result = await UserService.getAll()
 
                 return res.status(StatusCode.OK).json(result)
         }

@@ -31,6 +31,7 @@ export class User extends EntityBase {
     @Column({ select: false })
     @IsString()
     @IsNotEmpty()
+    @Length(6, 128)
     password: string;
 
     @Column({ unique: true })
@@ -47,7 +48,6 @@ export class User extends EntityBase {
     bio?: string;
 
     @Column({ nullable: true })
-    @IsFQDN()
     @IsOptional()
     @MinLength(10)
     avatar_url?: string;
