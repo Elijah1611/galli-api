@@ -23,6 +23,17 @@ export class UserController {
         }
 
         @TryCatch
+        public static async getOneByUsername(req: Request, res: Response): Promise<Response<User>> {
+
+                const username = req.params.username
+
+                const result = await UserService.getByUsername(username)
+
+                return res.status(StatusCode.OK).json(result)
+
+        }
+
+        @TryCatch
         public static async getOne(req: Request, res: Response): Promise<Response<User>> {
 
                 const uuid = req.params.id
@@ -31,7 +42,6 @@ export class UserController {
 
                 return res.status(StatusCode.OK).json(result)
         }
-
         @TryCatch
         public static async create(req: Request, res: Response, next: NextFunction): Promise<Response<User>> {
 

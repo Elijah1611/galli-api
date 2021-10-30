@@ -9,10 +9,10 @@ define(User, (faker: typeof Faker) => {
     const firstName = faker.name.firstName(gender)
     const lastName = faker.name.lastName(gender)
     const email = faker.internet.email(firstName, lastName)
-    const username = faker.internet.userName(firstName, lastName)
+    const username = faker.internet.userName(firstName)
     const password = faker.internet.password(6)
     const avatar = `https://ui-avatars.com/api/?name=${firstName}+${lastName}`
-  
+
     const user = new User()
 
     user.first_name = firstName

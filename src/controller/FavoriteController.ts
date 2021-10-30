@@ -18,6 +18,16 @@ export class FavoriteController {
     }
 
     @TryCatch
+    public static async getAllByUser(req: Request, res: Response): Promise<Response<Favorite>> {
+
+        const username = req.params.username
+
+        const result = await FavoriteService.getAllByUsername(username)
+
+        return res.status(StatusCode.OK).json(result)
+    }
+
+    @TryCatch
     public static async getOne(req: Request, res: Response): Promise<Response<Favorite>> {
 
         const uuid = req.params.id

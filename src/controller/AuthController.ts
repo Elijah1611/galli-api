@@ -17,7 +17,7 @@ export class AuthController {
 
         const token = await AuthService.Authenticate(user.username, user.password)
 
-        return res.status(StatusCode.OK).json({ access_token: `Bearer ${token}` })
+        return res.status(StatusCode.OK).json({ access_token: `Bearer ${token}`, username: user.username })
     }
 
     @TryCatch
@@ -29,6 +29,6 @@ export class AuthController {
 
         const token = AuthService.CreateJwtToken(newUser.id, newUser.username)
 
-        return res.status(StatusCode.OK).json({ access_token: token })
+        return res.status(StatusCode.OK).json({ access_token: token, username: newUser.username })
     }
 }

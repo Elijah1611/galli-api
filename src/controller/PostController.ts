@@ -18,6 +18,24 @@ export class PostController {
     }
 
     @TryCatch
+    public static async getAllFull(req: Request, res: Response): Promise<Response<Post[]>> {
+
+        const result = await PostService.getAllFull()
+
+        return res.status(StatusCode.OK).json(result)
+    }
+
+    @TryCatch
+    public static async getOneFull(req: Request, res: Response): Promise<Response<Post>> {
+
+        const uuid = req.params.id
+
+        const result = await PostService.getByUUIDFull(uuid)
+
+        return res.status(StatusCode.OK).json(result)
+    }
+
+    @TryCatch
     public static async getOne(req: Request, res: Response): Promise<Response<Post>> {
 
         const uuid = req.params.id

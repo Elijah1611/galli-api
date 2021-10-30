@@ -2,6 +2,7 @@ import { getConnection } from "typeorm";
 import { FavoriteCreateDto } from "../dto/create/FavoriteCreateDto";
 import { FavoriteUpdateDto } from "../dto/update/FavoriteUpdateDto";
 import { Favorite } from "../entity/Favorite";
+import { User } from "../entity/User";
 import { HttpException, Status, StatusCode } from "../exception/HttpException";
 import { ResourceTag } from "../interface/ResourceTag";
 
@@ -16,6 +17,21 @@ export class FavoriteService {
         return favorites
     }
 
+    public static async getAllByUsername(username: string): Promise<Favorite[]> {
+
+        const db = await getConnection(process.env.CONNECTION).getRepository(Favorite)
+        const userDb = await getConnection(process.env.CONNECTION).getRepository(User)
+
+        const user = await userDb.findOne({ where: { username: username } })
+
+        const favorites = await db.find({
+            where: { user_id: user.id },
+            relations: ["user", "post"]
+        })
+
+        return favorites
+    }
+
     public static async getByUUID(uuid: string): Promise<Favorite> {
 
         const db = await getConnection(process.env.CONNECTION).getRepository(Favorite)
@@ -26,6 +42,7 @@ export class FavoriteService {
 
         return favorite
     }
+
 
     public static async create(favorite: FavoriteCreateDto): Promise<Favorite> {
 

@@ -1,13 +1,17 @@
 const { createConnection } = require('typeorm')
 
-module.exports = [{
+module.exports = [
+  {
     name:"default",
-    type: "postgres" ,
-    host: "localhost",
-    port: 5432,
-    username: process.env.username || 'postgres',
-    password: process.env.password || null,
-    database: "galli-dev",
+    type: process.env.DB_TYPE || "postgres" ,
+    host: process.env.DB_HOST || "localhost",
+    port: parseInt(process.env.DB_PORT) || 5432,
+    username: process.env.DB_USERNAME || 'postgres',
+    password: process.env.DB_PASSWORD || null,
+    database: process.env.DATABASE || "galli-dev",
+    extra: {
+      ssl: true
+    },
     synchronize: false,
     logging: true,
     seeds: ["./src/data/seed/seeds/**/*.ts"],

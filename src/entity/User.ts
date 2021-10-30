@@ -1,6 +1,6 @@
 import { Exclude } from "class-transformer";
-import { IsAlpha, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsOptional, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
-import { Entity, Column, OneToMany } from "typeorm";
+import { IsAlpha, IsEmail, IsFQDN, IsLowercase, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Length, MaxLength, maxLength, MinLength } from "class-validator";
+import { Entity, Column, OneToMany, AfterLoad } from "typeorm";
 import { Comment } from "./Comment";
 import { EntityBase } from "./EntityBase";
 import { Favorite } from "./Favorite";
@@ -52,6 +52,11 @@ export class User extends EntityBase {
     @MinLength(10)
     avatar_url?: string;
 
+    @Column({ default: 0 })
+    @IsNumber()
+    @IsPositive()
+    total_hearts: number;
+
     @OneToMany(() => Post, post => post.user)
     posts: Post[]
 
@@ -61,4 +66,11 @@ export class User extends EntityBase {
     @OneToMany(() => Favorite, favorite => favorite.user)
     favorites: Favorite[]
 
+    @AfterLoad()
+    updateTotalHearts() {
+        if (this.posts) {
+            const totalHearts = this.posts.map(post => post.favorites.length).reduce((total, curr) => total + curr, 0)
+            this.total_hearts = totalHearts
+        }
+    }
 }

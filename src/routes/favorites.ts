@@ -3,6 +3,8 @@ import FavoriteController from "../controller/FavoriteController";
 
 const router: Router = express.Router()
 
+router.get('/favorites/username/:username', FavoriteController.getAllByUser)
+
 router.get('/favorites/:id', FavoriteController.getOne)
 
 router.patch('/favorites/:id', FavoriteController.update)

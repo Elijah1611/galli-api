@@ -4,16 +4,15 @@ import UserController from "../controller/UserController";
 
 const router: Router = express.Router()
 
-router
-    .route('/users')
-    // .get(passport.authenticate('jwt', { session: false }), UserController.getAll)
-    .get(UserController.getAll)
-    .post(UserController.create)
+router.get('/users/username/:username', UserController.getOneByUsername)
 
-router
-    .route('/users/:id')
-    .get(UserController.getOne)
-    .patch(UserController.update)
-    .delete(UserController.delete)
+router.get('/users/:id', UserController.getOne)
+router.patch('/users/:id', UserController.update)
+router.delete('/users/:id', UserController.delete)
+
+router.get('/users', UserController.getAll)
+router.post('/users', UserController.create)
+// .get(passport.authenticate('jwt', { session: false }), UserController.getAll)
+
 
 export default router

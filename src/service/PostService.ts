@@ -16,6 +16,26 @@ export class PostService {
         return posts
     }
 
+    public static async getAllFull(): Promise<Post[]> {
+
+        const db = await getConnection(process.env.CONNECTION).getRepository(Post)
+
+        const posts = await db.find({ relations: ["user", "comments", "favorites"], order: { created_at: "DESC" } })
+
+        return posts
+    }
+
+    public static async getByUUIDFull(uuid: string): Promise<Post> {
+
+        const db = await getConnection(process.env.CONNECTION).getRepository(Post)
+
+        const post = await db.findOne(uuid, { relations: ["user", "comments", "comments.user", "comments.user.favorites", "favorites"] })
+
+        if (!post) throw new HttpException(StatusCode.NOT_FOUND, Status.FAIL, "Post by that id could not be found.")
+
+        return post
+    }
+
     public static async getByUUID(uuid: string): Promise<Post> {
 
         const db = await getConnection(process.env.CONNECTION).getRepository(Post)
