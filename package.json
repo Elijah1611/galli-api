@@ -51,6 +51,7 @@
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
     "test": "jest",
+    "build": "tsc",
     "run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "generate": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:generate -n MigrationName",
     "revert": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert",
