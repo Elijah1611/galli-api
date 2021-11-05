@@ -1,0 +1,10 @@
+version: ‘3’
+services:
+server: 
+  image: galli.azurecr.io/azure-node-test-ps:latest
+  container_name: azure-node-test
+  environment:
+    WEBSITES_PORT: 8000
+  ports:
+   — 8000:8000
+  restart: always
