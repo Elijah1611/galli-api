@@ -1,5 +1,8 @@
 import S3, { GetObjectRequest, PutObjectRequest } from "aws-sdk/clients/s3"
 import fs from 'fs'
+import util from 'util'
+
+const unlinkFile = util.promisify(fs.unlink)
 
 export class ImageService {
 
@@ -13,6 +16,7 @@ export class ImageService {
 
     public static async UploadImageToS3(file: any) {
         console.log('bucket', process.env.AWS_BUCKET_NAME)
+        // could resize image here
         const fileStream = fs.createReadStream(file.path)
 
         const uploadParams: PutObjectRequest = {
@@ -23,7 +27,11 @@ export class ImageService {
 
         const s3 = this.CreateS3Connection()
 
-        return await s3.upload(uploadParams).promise()
+        const result = await s3.upload(uploadParams).promise()
+
+        await unlinkFile(file.path)
+
+        return result
     }
 
     public static DownloadImageFromS3(file_key: string) {

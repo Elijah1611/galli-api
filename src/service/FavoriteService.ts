@@ -43,6 +43,17 @@ export class FavoriteService {
         return favorite
     }
 
+    public static async find(post_id: string, user_id: string): Promise<Favorite> {
+
+        const db = await getConnection(process.env.CONNECTION).getRepository(Favorite)
+
+        const favorite = await db.findOne({ where: { post_id, user_id } })
+
+        if (!favorite) throw new HttpException(StatusCode.NOT_FOUND, Status.FAIL, "Favorite by that id could not be found.")
+
+        return favorite
+    }
+
 
     public static async create(favorite: FavoriteCreateDto): Promise<Favorite> {
 

@@ -93,22 +93,6 @@ export class UserService {
         return updatedUser
     }
 
-    public static async updateTotalHearts(id: string, totalHearts: number): Promise<User> {
-        const db = await getConnection(process.env.CONNECTION).getRepository(User)
-
-        const foundUser = await db.findOne(id)
-
-        if (!foundUser) {
-            throw new HttpException(StatusCode.NOT_FOUND, Status.FAIL, "Could not find user by that id.")
-        }
-
-        await db.update(id, { total_hearts: totalHearts })
-
-        const updatedUser = await db.findOne(id)
-
-        return updatedUser
-    }
-
     public static async remove(uuid: string): Promise<Number> {
 
         const db = await getConnection(process.env.CONNECTION).getRepository(User)

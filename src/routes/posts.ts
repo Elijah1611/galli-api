@@ -12,6 +12,8 @@ router.get('/posts/:id', PostController.getOne)
 router.patch('/posts/:id', PostController.update)
 router.delete('/posts/:id', PostController.delete)
 
+router.post('/posts/addLike', PostController.addLike)
+router.post('/posts/removeLike', PostController.removeLike)
 router.get('/posts', PostController.getAll)
 router.post('/posts', PostController.create)
 

@@ -9,9 +9,6 @@ module.exports = [
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || null,
     database: process.env.DATABASE || "galli-dev",
-    extra: {
-      ssl: true
-    },
     synchronize: false,
     logging: true,
     seeds: ["./src/data/seed/seeds/**/*.ts"],

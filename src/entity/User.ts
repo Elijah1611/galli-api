@@ -55,7 +55,7 @@ export class User extends EntityBase {
     @Column({ default: 0 })
     @IsNumber()
     @IsPositive()
-    total_hearts: number;
+    likes: number;
 
     @OneToMany(() => Post, post => post.user)
     posts: Post[]
@@ -65,12 +65,4 @@ export class User extends EntityBase {
 
     @OneToMany(() => Favorite, favorite => favorite.user)
     favorites: Favorite[]
-
-    @AfterLoad()
-    updateTotalHearts() {
-        if (this.posts) {
-            const totalHearts = this.posts.map(post => post.favorites.length).reduce((total, curr) => total + curr, 0)
-            this.total_hearts = totalHearts
-        }
-    }
 }

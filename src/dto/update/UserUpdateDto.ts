@@ -39,4 +39,8 @@ export class UserUpdateDto {
     @MinLength(10)
     avatar_url?: string;
 
+    @Column({ nullable: false })
+    @IsOptional()
+    likes?: number;
+
 }

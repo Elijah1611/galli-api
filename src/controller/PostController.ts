@@ -80,6 +80,26 @@ export class PostController {
             message: `${removed} post successfully removed.`,
         })
     }
+
+    @TryCatch
+    public static async addLike(req: Request, res: Response): Promise<Response<HttpException>> {
+
+        const { post_id, user_id } = req.body
+
+        const updatedPost = await PostService.addLike(post_id, user_id)
+
+        return res.status(StatusCode.OK).json(updatedPost)
+    }
+
+    @TryCatch
+    public static async removeLike(req: Request, res: Response): Promise<Response<HttpException>> {
+
+        const { post_id, user_id } = req.body
+
+        const updatedPost = await PostService.removeLike(post_id, user_id)
+
+        return res.status(StatusCode.OK).json(updatedPost)
+    }
 }
 
 export default PostController
