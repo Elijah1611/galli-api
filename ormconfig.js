@@ -2,8 +2,8 @@ const { createConnection } = require('typeorm')
 
 module.exports = [
   {
-    name:"default",
-    type: process.env.DB_TYPE || "postgres" ,
+    name: "default",
+    type: process.env.DB_TYPE || "postgres",
     host: process.env.DB_HOST || "localhost",
     port: parseInt(process.env.DB_PORT) || 5432,
     username: process.env.DB_USERNAME || 'postgres',
@@ -23,8 +23,8 @@ module.exports = [
     }
   },
   {
-    name:"testing",
-    type: "postgres" ,
+    name: "testing",
+    type: "postgres",
     host: "localhost",
     port: 5432,
     username: process.env.username || 'postgres',

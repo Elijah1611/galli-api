@@ -14,7 +14,7 @@ export class ImageController {
 
         const title = req.body.description
 
-        const imageLoc = `${process.env.HOST}:${process.env.PORT}/api/image/${result.Key}`
+        const imageLoc = `${process.env.API_HOST}/api/image/${result.Key}`
 
         return res.json({ imageLoc, title, ...result })
     }
