@@ -11,7 +11,9 @@ module.exports = [
     database: process.env.DATABASE || "galli-dev",
     synchronize: false,
     logging: true,
-    ssl: true,
+    ssl: { 
+      rejectUnauthorized: false 
+    },
     seeds: ["./src/data/seed/seeds/**/*.ts"],
     factories: ["./src/data/seed/factories/**/*.ts"],
     entities: ["./src/entity/*.ts"],
