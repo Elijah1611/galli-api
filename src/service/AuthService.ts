@@ -11,8 +11,12 @@ export class AuthService {
         const db = connection.getRepository(User)
         const dbQuery = connection.createQueryBuilder()
 
+        
         const user = await db.findOne({ username: username })
-
+        
+        if (!user)
+            throw new HttpException(StatusCode.UNAUTHORIZED, Status.FAIL, "User Does Not Exist.") 
+            
         // @TODO: Refactor to use simple syntax 
         // db.find({ select: ["password"], where: { username: user.username } })
         const userPasswordResults = await connection.manager.query(`SELECT "password" FROM "user" as u WHERE u.username = '${user.username}'`)
