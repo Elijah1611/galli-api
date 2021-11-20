@@ -10,4 +10,6 @@ RUN npm run build
 
 EXPOSE 7000
 
+EXPOSE $PORT
+
 CMD npm run start
